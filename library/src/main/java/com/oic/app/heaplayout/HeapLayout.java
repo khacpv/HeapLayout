@@ -1,11 +1,14 @@
 package com.oic.app.heaplayout;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,34 +57,50 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
 
     public void add(ItemData item) {
         itemList.add(item);
-        refresh();
+
+        final CircleImageView imageView = new CircleImageView(getContext());
+        int size = (int) (getWidth() * item.size);   // circle image
+        HeapLayout.LayoutParams params = new HeapLayout.LayoutParams(size, size);
+        imageView.setImageResource(item.src);
+        params.leftMargin = (int) (getWidth() * item.x) - params.width / 2;
+        params.topMargin = (int) (getHeight() * item.y) - params.height / 2;
+        imageView.setOnTouchListener(this);
+        imageView.setTag(item);
+        addView(imageView, params);
+
+        final ValueAnimator anim = ObjectAnimator.ofInt(100,0);
+        anim.setDuration(500);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int)animation.getAnimatedValue();
+                imageView.setPadding(value,value,value,value);
+            }
+        });
+        anim.setInterpolator(new BounceInterpolator());
+        anim.start();
     }
 
-    public void clearImage() {
+    public void clearAll() {
         itemList.clear();
-        refresh();
+        reInvalidate();
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        refresh();
-    }
-
-    public void refresh() {
-        removeAllViews();
-        if (imvDelete != null) {
-            imvDelete.setVisibility(View.GONE);
-        }
-
         reInvalidate();
     }
 
     public void reInvalidate() {
+        if (imvDelete != null) {
+            imvDelete.setVisibility(View.GONE);
+        }
+
         removeAllViews();
 
         for (ItemData item : itemList) {
-            CircleImageView imageView = new CircleImageView(getContext());
+            final CircleImageView imageView = new CircleImageView(getContext());
             int size = (int) (getWidth() * item.size);   // circle image
             HeapLayout.LayoutParams params = new HeapLayout.LayoutParams(size, size);
             imageView.setImageResource(item.src);
@@ -155,7 +174,7 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
                     itemList.add(newItem);
                 }
                 newItem = null;
-                refresh();
+                reInvalidate();
                 break;
         }
         return true;
@@ -237,7 +256,7 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
                     }
                 }
                 currentView = null;
-                refresh();
+                reInvalidate();
                 return true;
         }
         return false;

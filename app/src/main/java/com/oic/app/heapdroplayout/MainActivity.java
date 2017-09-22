@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         String json = layoutHeap.getPatternFromAsset("pattern_72.js");
         final List<HeapLayout.ItemData> data = gson.fromJson(json, type);
         position = 0;
-        layoutHeap.refresh();
+        layoutHeap.reInvalidate();
         layoutHeap.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     layoutHeap.add(itemData);
                 }
                 position++;
-                layoutHeap.postDelayed(this, 500);
+                layoutHeap.postDelayed(this, 1500);
             }
         }, 1000);
     }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clearAllImage(View view) {
-        layoutHeap.clearImage();
+        layoutHeap.clearAll();
     }
 
     public void onImvClick(View view) {
