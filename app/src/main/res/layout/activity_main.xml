@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.oic.app.heapdroplayout.MainActivity"
+    >
+
+  <com.oic.app.heapdroplayout.HeapLayout
+      android:id="@+id/layout_heap"
+      android:layout_width="match_parent"
+      android:layout_height="174dp"
+      android:background="#141414"
+      />
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/imv_delete"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:layout_alignParentEnd="true"
+      android:src="@drawable/delete"
+      android:visibility="gone"
+      tools:visibility="visible"
+      />
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/btn_print_output"
+      android:layout_below="@id/layout_heap"
+      >
+    <TextView
+        android:id="@+id/tv_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log"
+        android:textColor="#F00"
+        />
+  </ScrollView>
+
+  <Button
+      android:id="@+id/btn_print_output"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:onClick="printOutput"
+      android:text="Print Output"
+      />
+  <CheckBox
+      android:id="@+id/cb_touch_to_add"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/btn_print_output"
+      android:text="Touch To Add"
+      />
+  <Button
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/btn_print_output"
+      android:layout_toEndOf="@id/cb_touch_to_add"
+      android:onClick="clearAllImage"
+      android:text="Clear"
+      />
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/btn_print_output"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@id/layout_heap"
+      android:gravity="bottom"
+      android:orientation="horizontal"
+      >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_large"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:onClick="onImvClick"
+        android:src="@drawable/user"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_medium"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:onClick="onImvClick"
+        android:src="@drawable/taylor"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_small"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:onClick="onImvClick"
+        android:src="@drawable/madona"
+        />
+  </LinearLayout>
+
+</RelativeLayout>
