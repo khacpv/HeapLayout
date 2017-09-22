@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         cbTouchToAdd = (CheckBox) findViewById(R.id.cb_touch_to_add);
         layoutHeap.setImvDelete(imvDelete);
         layoutHeap.setTvLog(tvLog);
+        layoutHeap.setTouchToMove(true);
 
         cbTouchToAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

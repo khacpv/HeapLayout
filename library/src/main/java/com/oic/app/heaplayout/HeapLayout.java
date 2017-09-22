@@ -31,6 +31,8 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
 
     private boolean touchToAdd = false;
 
+    private boolean touchToMove = false;
+
     public HeapLayout(Context context) {
         super(context);
         init();
@@ -93,6 +95,10 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
 
     public void setTouchToAdd(boolean touchToAdd) {
         this.touchToAdd = touchToAdd;
+    }
+
+    public void setTouchToMove(boolean touchToMove) {
+        this.touchToMove = touchToMove;
     }
 
     CircleImageView newItemView;
@@ -171,7 +177,9 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
+        if (!touchToMove) {
+            return false;
+        }
         switch (event.getAction()) {
             case ACTION_DOWN:
                 if (currentView != null) {
