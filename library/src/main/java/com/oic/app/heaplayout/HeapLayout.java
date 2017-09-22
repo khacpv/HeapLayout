@@ -1,4 +1,4 @@
-package com.oic.app.heapdroplayout;
+package com.oic.app.heaplayout;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.oic.app.heaplayoutlibrary.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.io.BufferedReader;
 import java.io.IOException;

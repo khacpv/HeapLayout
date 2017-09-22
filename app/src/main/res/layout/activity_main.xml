@@ -7,7 +7,7 @@
     tools:context="com.oic.app.heapdroplayout.MainActivity"
     >
 
-  <com.oic.app.heapdroplayout.HeapLayout
+  <com.oic.app.heaplayout.HeapLayout
       android:id="@+id/layout_heap"
       android:layout_width="match_parent"
       android:layout_height="174dp"
