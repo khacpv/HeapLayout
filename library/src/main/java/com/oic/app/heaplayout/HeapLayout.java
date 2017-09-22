@@ -194,9 +194,12 @@ public class HeapLayout extends RelativeLayout implements View.OnTouchListener {
                 float newX = event.getRawX() - location[0] - getWidth() * item.size / 2;
                 float newY = event.getRawY() - location[1] - getHeight() * item.size / 2;
 
-                imvDelete.setVisibility(View.GONE);
-                if (newX > getWidth() - dpToPx(50) && newY < dpToPx(50)) {
-                    imvDelete.setVisibility(View.VISIBLE);
+                if (imvDelete != null) {
+                    // TODO get hit rect with delete view
+                    imvDelete.setVisibility(View.GONE);
+                    if (newX > getWidth() - dpToPx(50) && newY < dpToPx(50)) {
+                        imvDelete.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 HeapLayout.LayoutParams params =
